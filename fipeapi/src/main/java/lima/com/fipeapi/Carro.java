@@ -5,6 +5,7 @@ public class Carro {
 	private String marca;
 	private String modelo;
 	private int ano;
+	private String valor;
 	
 	
 	
@@ -42,6 +43,18 @@ public class Carro {
 	public void setAno(int ano) {
 		
 		this.ano = ano;
+		
+	}
+	
+	public String getValor() {
+		
+		return this.valor;
+		
+	}
+	
+	public void setValor(String valor) {
+		
+		this.valor = valor;
 		
 	}
 	
