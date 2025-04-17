@@ -59,7 +59,7 @@ public class App
 	    	System.out.println("Digite o código do modelo: ");
 	    	String codigoModelo = scanner.nextLine();
 	    	
-	    	//PASSO 3, OBTENDO OS ANOS ANOS DO MODELO ------------------------
+	    	//PASSO 3, OBTENDO OS ANOS DO MODELO E INFORMAÇÕES DO CARRO ------------------------
 	    	
 	    	String anosJson;
 	    	
@@ -74,15 +74,45 @@ public class App
 	    		
 	    	}
 	    	
-	    	//***DEV*** CONTINUAR DESENVOLVENDO
-	    			
+	    	System.out.println("Digite o codigo do ano do modelo: ");
+	    	String codigoAnoModelo = scanner.nextLine();
+	    	
+	    	String anoModeloJson = ConnectionAPI.get("https://parallelum.com.br/fipe/api/v1/carros/marcas/" + codigoMarca + "/modelos/" + codigoModelo + "/anos/" + codigoAnoModelo);
+	    	
+	    	JsonObject anosModeloObj = JsonParser.parseString(anoModeloJson).getAsJsonObject();
+	    	
+	    	//POR SE TRATAR DE UM OBJETO SIMPLES, NÃO PRECISA DE FOR, APENAS DA LÓGICA DE CAPTURA.
+	    	System.out.println("Dados do veículo:");
+	    	System.out.println("Valor: " + anosModeloObj.get("Valor").getAsString());
+	    	System.out.println("Marca: " + anosModeloObj.get("Marca").getAsString());
+	    	System.out.println("Modelo: " + anosModeloObj.get("Modelo").getAsString());
+	    	System.out.println("Ano do Modelo: " + anosModeloObj.get("AnoModelo").getAsString());
+	    	System.out.println("Combustivel: " + anosModeloObj.get("Combustivel").getAsString());
+	    	
+	    	
+	    	
+//    		{
+//    		  "TipoVeiculo": 1,
+//    		  "Valor": "R$ 45.238,00",
+//    		  "Marca": "Toyota",
+//    		  "Modelo": "Supra",
+//    		  "AnoModelo": 2007,
+//    		  "Combustivel": "Gasolina",
+//    		  "CodigoFipe": "002023-0",
+//    		  "MesReferencia": "abril de 2025",
+//    		  "SiglaCombustivel": "G"
+//    		}
+	    	
+	    	
 		} catch (Exception e) {
 			
 			System.out.print("erro na requisição ");
 			e.printStackTrace();
 			System.out.print("fim do erro na requisição");
 			
-		}   	
+		}finally {
+		    scanner.close(); // <- fecha o scanner aqui
+		}
     	
     	
         
